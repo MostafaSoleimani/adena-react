@@ -1,0 +1,20 @@
+.adena-tab-designer-fields {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.adena-tab-designer-fields > .adena-designer-fields {
+    width: 170px;
+    height: 50px;
+    padding: 0 10px;
+    margin: 20px 0;
+}
+
+.designer-container {
+    border: 1px solid #0000ff57;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 20px;
+}

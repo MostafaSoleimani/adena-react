@@ -1,0 +1,12 @@
+.adena-tab-designer-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.adena-tab-designer-fields > .adena-designer-fields {
+    width: 95%;
+    height: 150px;
+    margin: 20px 0;
+}
