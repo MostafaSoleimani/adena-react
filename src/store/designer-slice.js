@@ -10,11 +10,9 @@ const designerSlice = createSlice({
   },
   reducers: {
     addContainer: (state, action) => {
-      console.log("state, action:    ", state, action);
       state.layout = [...state.layout, action.payload];
     },
     addField: (state, action) => {
-      console.log("state, action:    ", state, action);
       const foundContainer = state.layout.find(
         (x) => x.id === action.payload.id
       );
@@ -24,7 +22,6 @@ const designerSlice = createSlice({
       ];
     },
     editContainer: (state, action) => {
-      console.log("state, action:    ", state, action);
       const container = state.layout.find((x) => x.id === action.payload.id);
       container.name = action.payload.name;
       delete action.payload.name;
