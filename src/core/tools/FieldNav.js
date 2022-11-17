@@ -28,7 +28,7 @@ export default function FieldNav({ config, remove, edit, add }) {
   return (
     <div className="designer-container-bar">
       <div>
-        <label>{config.data.label}</label>
+        <label>{config.data.type}</label>
       </div>
       <div>
         <Icon color="primary" onClick={remove}>

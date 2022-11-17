@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import * as React from "react";
 
-export default function DesignerDropDown() {
+export default function DesignerDropDown({config}) {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
@@ -12,12 +12,12 @@ export default function DesignerDropDown() {
   };
   return (
     <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <InputLabel id="demo-simple-select-label">{config.data.label}</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={age}
-        label="Age"
+        label={config.data.label}
         onChange={handleChange}
       >
         <MenuItem value={10}>Ten</MenuItem>

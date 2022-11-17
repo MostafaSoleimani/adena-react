@@ -15,6 +15,7 @@ export default function AdenaTabDesigner() {
       name: "container",
       data: {
         label: "Simple Container",
+        type: 'Container',
         children: [],
         style: {},
       },
