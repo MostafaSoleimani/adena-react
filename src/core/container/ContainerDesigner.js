@@ -1,10 +1,12 @@
 import React from "react";
-import "./ContainerDesigner.css";
+import { useDispatch } from "react-redux";
+import { designerActions } from "../../store/designer-slice";
 import DesignerCheckbox from "../fields/Checkbox";
 import DesignerDropDown from "../fields/Dropdown";
 import DesignerNumberField from "../fields/NumberField";
 import DesignerTextField from "../fields/TextField";
-import ChooseFieldDialog from "../tools/ChooseFieldDialog";
+import FieldNav from "../tools/FieldNav";
+import "./ContainerDesigner.css";
 
 const FIELDS_MODELS = {
   Checkbox: <DesignerCheckbox />,
@@ -13,34 +15,32 @@ const FIELDS_MODELS = {
   Dropdown: <DesignerDropDown />,
 };
 
-export default function AdenaContainerDesigner() {
-  const [fields, setFields] = React.useState([]);
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
+export default function AdenaContainerDesigner({ config }) {
+  const dispatch = useDispatch();
+  const addField = (value) => {
+    dispatch(designerActions.addField(value));
   };
 
-  const handleClose = (value) => {
-    setOpen(false);
-    setFields((pre) => [...pre, value]);
+  const removeField = (field) => {
+    dispatch(designerActions.removeField({id: config.id, field}))
+  };
+  const removeContainer = () => {
+    dispatch(designerActions.removeContainer(config.id));
   };
 
-  const renderedFields = fields.map((x, i) => (
+  const renderedFields = config.data.children.map((x, i) => (
     <div key={i} className="adena-designer-fields">
-      {FIELDS_MODELS[x]}
+    <FieldNav remove={() => removeField(x)} config={x} />
+      {FIELDS_MODELS[x.data.type]}
     </div>
   ));
   return (
-    <>
-      <div className="designer-container">
-        <button onClick={handleClickOpen}>Add Field</button>
-        <ChooseFieldDialog open={open} onClose={handleClose} />
+    <div className="designer-container">
+      <FieldNav add={addField} remove={removeContainer} config={config} />
 
-        <div className="adena-tab-designer-main">
-          <div className="adena-tab-designer-fields">{renderedFields}</div>
-        </div>
+      <div className="adena-tab-designer-main">
+        <div className="adena-tab-designer-fields">{renderedFields}</div>
       </div>
-    </>
+    </div>
   );
 }
