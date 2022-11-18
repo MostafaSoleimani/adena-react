@@ -13,7 +13,7 @@ export default function FieldNav({ config, remove, edit, add }) {
   const handleClose = (value) => {
     setOpen(false);
     add({
-      id: config.id,
+      containerId: config.id,
       field: {
         id: uuid(),
         name: value,

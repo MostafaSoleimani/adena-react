@@ -1,11 +1,11 @@
-.adena-tab-designer-fields {
+.adena-container-designer-fields {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
 
-.adena-tab-designer-fields > .adena-designer-fields {
+.adena-container-designer-fields > .adena-designer-fields {
     width: 170px;
     height: 80px;
     padding: 0 10px;

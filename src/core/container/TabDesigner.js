@@ -2,38 +2,59 @@ import React from "react";
 import "./TabDesigner.css";
 import AdenaContainerDesigner from "./ContainerDesigner";
 import uuid from "react-uuid";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from "react-redux";
 import { designerActions } from "../../store/designer-slice";
-import Icon from '@mui/material/Icon';
+import Icon from "@mui/material/Icon";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
-export default function AdenaTabDesigner() {
-  const containers = useSelector(state => state.designer.layout);
+export default function AdenaTabDesigner({ config }) {
   const dispatch = useDispatch();
   const addContainer = () => {
-    dispatch(designerActions.addContainer({
-      id: uuid(),
-      name: "container",
-      data: {
-        label: "Simple Container",
-        type: 'Container',
-        children: [],
-        style: {},
-      },
-    }))
+    dispatch(
+      designerActions.addContainer({
+        tabId: config.id,
+        container: {
+          id: uuid(),
+          name: "container",
+          data: {
+            label: "Simple Container",
+            type: "Container",
+            children: [],
+            style: {},
+          },
+        },
+      })
+    );
   };
 
-  const renderedFields = containers.map((x, i) => (
-    <AdenaContainerDesigner key={i} config={x} />
+  const handleTabNameChange = (e) => {
+    const label = e.target.value;
+    dispatch(
+      designerActions.editTab({
+        name: config.name,
+        id: config.id,
+        data: { ...config.data, label },
+      })
+    );
+  };
+
+  const renderedContainers = config.data.children.map((x, i) => (
+    <AdenaContainerDesigner key={i} config={x} tabId={config.id} />
   ));
   return (
-    <>
-      <header>
-        <h2>Hi Welcome to Form Designer</h2>
-        <Icon color="primary" onClick={addContainer}>add_circle</Icon>
-      </header>
-      <main className="adena-tab-designer-main">
-        <div className="adena-tab-designer-containers">{renderedFields}</div>
-      </main>
-    </>
+    <div className="adena-tab-designer-main">
+      <div className="adena-tab-designer-nav">
+        {/* <TextField
+          name="placeholder"
+          label="Place Holder"
+          onChange={handleTabNameChange}
+        /> */}
+        <Button color="primary" variant="contained" onClick={addContainer}>
+          Add Container<Icon>add_circle</Icon>
+        </Button>
+      </div>
+      {renderedContainers}
+    </div>
   );
 }

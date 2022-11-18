@@ -1,10 +1,10 @@
 import './App.css';
-import AdenaTabDesigner from './core/container/TabDesigner';
+import FormDesigner from './core/container/FormDesigner';
 
 function App() {
   return (
     <div className="App">
-      <AdenaTabDesigner/>
+      <FormDesigner/>
     </div>
   );
 }
