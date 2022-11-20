@@ -23,7 +23,7 @@ export default function FormDesigner() {
     if(id && id !== 'new') {
       dispatch(fetchFormById(id))
     }
-  }, [id])
+  }, [dispatch, id])
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };

@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import Icon from "@mui/material/Icon";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -44,11 +45,13 @@ export default function AdenaTabDesigner({ config }) {
   return (
     <div className="adena-tab-designer-main">
       <div className="adena-tab-designer-nav">
-        {/* <TextField
-          name="placeholder"
-          label="Place Holder"
+        <TextField
+          name="tabName"
+          label="Tab Name"
+          defaultValue={config.data.label}
           onChange={handleTabNameChange}
-        /> */}
+          size="small"
+        />
         <Button color="primary" variant="contained" onClick={addContainer}>
           Add Container<Icon>add_circle</Icon>
         </Button>
