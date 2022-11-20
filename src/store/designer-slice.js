@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import uuid from "react-uuid";
+import { loadState } from "../core/tools/browser-storage";
 
 const designerSlice = createSlice({
   name: "designer",
@@ -27,6 +28,11 @@ const designerSlice = createSlice({
       );
       foundContainer.data.children.push(action.payload.field);
     },
+    editForm: (state, action) => {state.name = action.payload.name},
+    setForm: (state, action) => {
+      state = action.payload
+      console.log(state)
+    },
     editTab: (state, action) => {
       let tab = state.layout.find(
         (x) => x.id === action.payload.id
@@ -38,10 +44,10 @@ const designerSlice = createSlice({
       const foundTab = state.layout.find(
         (x) => x.id === action.payload.tabId
       );
-      const container = foundTab.data.children.find((x) => x.id === action.payload.id);
-      container.name = action.payload.name;
-      delete action.payload.name;
-      container.data = action.payload;
+      const container = foundTab.data.children.find((x) => x.id === action.payload.container.id);
+      container.name = action.payload.container.name;
+      delete action.payload.container.name;
+      container.data = action.payload.container;
     },
     editField: (state, action) => {
       const foundTab = state.layout.find(
@@ -78,7 +84,25 @@ const designerSlice = createSlice({
       );
     },
   },
+  extraReducers: (builder) => {
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchFormById.fulfilled, (state, action) => {
+      // Add user to the state array
+      // state = action.payload
+      state.layout = action.payload.layout;
+      state.id = action.payload.id;
+      state.name = action.payload.name;
+    })
+  }
 });
+
+export const fetchFormById = createAsyncThunk(
+  'designer/setForm',
+  async (id, thunkAPI) => {
+    const data = await loadState();
+    return data.find(x => x.id === id);
+  }
+)
 
 export const designerActions = designerSlice.actions;
 

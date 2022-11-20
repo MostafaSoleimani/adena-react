@@ -1,12 +1,11 @@
-import React from "react";
-import "./TabDesigner.css";
-import AdenaContainerDesigner from "./ContainerDesigner";
-import uuid from "react-uuid";
-import { useDispatch } from "react-redux";
-import { designerActions } from "../../store/designer-slice";
-import Icon from "@mui/material/Icon";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import Icon from "@mui/material/Icon";
+import React from "react";
+import { useDispatch } from "react-redux";
+import uuid from "react-uuid";
+import { designerActions } from "../../store/designer-slice";
+import AdenaContainerDesigner from "./ContainerDesigner";
+import "./TabDesigner.css";
 
 export default function AdenaTabDesigner({ config }) {
   const dispatch = useDispatch();

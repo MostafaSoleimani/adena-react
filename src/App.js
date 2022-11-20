@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import FormDesigner from "./core/container/FormDesigner";
+import AdenaDesigner from "./Pages/AdenaDesigner";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
           path="/"
           element={<Link to="design">Go To Design</Link>}
         ></Route>
-        <Route path="design" element={<FormDesigner />} />
+        <Route path="design" element={<AdenaDesigner />} />
+        <Route path="design/:id" element={<FormDesigner />} />
         <Route
           path="engine"
           element={<h1> Engine is not implemented yet</h1>}

@@ -3,7 +3,7 @@ import uuid from "react-uuid";
 import Icon from "@mui/material/Icon";
 import ChooseFieldDialog from "../tools/ChooseFieldDialog";
 
-export default function FieldNav({ config, remove, edit, add }) {
+export default function FieldNav({ config, remove, edit, add, label }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -28,7 +28,7 @@ export default function FieldNav({ config, remove, edit, add }) {
   return (
     <div className="designer-container-bar">
       <div>
-        <label>{config.data.type}</label>
+        <label>{label}</label>
       </div>
       <div>
         <Icon color="primary" onClick={remove}>

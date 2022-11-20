@@ -36,7 +36,7 @@ export default function AdenaContainerDesigner({ config, tabId }) {
     if (parentId) {
       dispatch(designerActions.editField({tabId, containerId: config.id, field: fieldConfig}));
     } else {
-      dispatch(designerActions.editContainer(tabId, fieldConfig));
+      dispatch(designerActions.editContainer({tabId, container: fieldConfig}));
     }
   };
 
@@ -46,6 +46,7 @@ export default function AdenaContainerDesigner({ config, tabId }) {
         remove={() => removeField(x)}
         config={x}
         edit={() => handleClickOpen(x, config.id)}
+        label={x.data.type}
       />
       {FIELDS_MODELS(x)}
     </div>
@@ -57,6 +58,7 @@ export default function AdenaContainerDesigner({ config, tabId }) {
         remove={removeContainer}
         edit={() => handleClickOpen(config, null)}
         config={config}
+        label={config.data.label}
       />
 
       <div className="adena-container-designer-main">
