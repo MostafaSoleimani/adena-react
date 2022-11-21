@@ -3,7 +3,7 @@ import {
   Routes
 } from "react-router-dom";
 import "./App.css";
-import FormDesigner from "./core/container/FormDesigner";
+import FormDesigner from "./core-design/container/FormDesigner";
 import AdenaDesigner from "./Pages/AdenaDesigner";
 
 function App() {

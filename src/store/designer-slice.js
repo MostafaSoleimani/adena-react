@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import uuid from "react-uuid";
-import { loadState } from "../core/tools/browser-storage";
+import { loadState } from "../core-design/tools/browser-storage";
 
 const designerSlice = createSlice({
   name: "designer",
