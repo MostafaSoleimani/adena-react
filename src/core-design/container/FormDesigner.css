@@ -33,9 +33,8 @@
 }
 
 .adena-tab-designer-main-tabs {
-    margin-top: 5px;
     border: 1px solid #ff000056;
     border-radius: 3px;
     padding: 5px;
-    min-height: 400px;
+    min-height: 500px;
 }

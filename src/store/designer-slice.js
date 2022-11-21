@@ -10,6 +10,12 @@ const designerSlice = createSlice({
     layout: [],
   },
   reducers: {
+    shiftLeftTab: (state, action) => {
+      if(action.payload !== 0) insertAndShift(state.layout, action.payload, action.payload - 1)
+    },
+    shiftRightTab: (state, action) => {
+      if(action.payload !== state.layout - 1) insertAndShift(state.layout, action.payload, action.payload + 1)
+    },
     addTab: (state, action) => {
       state.layout = [...state.layout, action.payload];
     },
@@ -99,6 +105,13 @@ const designerSlice = createSlice({
 export const fetchFormById = createAsyncThunk(
   'designer/setForm',
   async (id, thunkAPI) => {
+    if (!id || id === 'new') {
+      return{
+        name: "Simple Design",
+        id: uuid(),
+        layout: [],
+      }
+    }
     const data = await loadState();
     return data.find(x => x.id === id);
   }
@@ -107,3 +120,9 @@ export const fetchFormById = createAsyncThunk(
 export const designerActions = designerSlice.actions;
 
 export default designerSlice;
+
+
+function insertAndShift(arr, from, to) {
+  let cutOut = arr.splice(from, 1)[0]; // cut the element at index 'from'
+  arr.splice(to, 0, cutOut);            // insert it at index 'to'
+}

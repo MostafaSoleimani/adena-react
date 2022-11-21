@@ -14,7 +14,6 @@ import { a11yProps, TabPanel } from "../tools/TabPanel";
 import AdenaTabDesigner from "./TabDesigner";
 import Logo from "../../logo-no-background.png";
 import "./FormDesigner.css";
-import { display } from "@mui/system";
 
 export default function FormDesigner() {
   const { id } = useParams();
@@ -23,9 +22,7 @@ export default function FormDesigner() {
   const formDesign = useSelector((state) => state.designer);
   const [tabValue, setTabValue] = React.useState(0);
   React.useEffect(() => {
-    if (id && id !== "new") {
-      dispatch(fetchFormById(id));
-    }
+    dispatch(fetchFormById(id));
   }, [dispatch, id]);
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -50,6 +47,15 @@ export default function FormDesigner() {
     );
   };
 
+  const shiftLeftTab = () => {
+    dispatch(designerActions.shiftLeftTab(tabValue));
+    setTabValue((pre) => pre - 1);
+  };
+  const shiftRightTab = () => {
+    dispatch(designerActions.shiftRightTab(tabValue));
+    setTabValue((pre) => pre + 1);
+  };
+
   const SaveForm = () => {
     saveState(formDesign);
   };
@@ -68,9 +74,21 @@ export default function FormDesigner() {
       <header className="adena-form-designer-header">
         <div className="adena-form-designer-header-left">
           <img src={Logo} alt="Logo" />
-          <h2> Designer</h2>
+          Designer
         </div>
-        {formDesign.name}
+        <TextField
+          label="Design Name"
+          id="outlined-size-small"
+          value={formDesign.name}
+          size="small"
+          onChange={handleTabNameChange}
+          sx={{
+            input: {
+              color: "white",
+              borderColor: "#ffffff",
+            },
+          }}
+        />
         <div className="adena-form-designer-header-right">
           <Button color="primary" variant="contained" onClick={SaveForm}>
             Save
@@ -78,15 +96,6 @@ export default function FormDesigner() {
         </div>
       </header>
       <main className="adena-tab-designer-main">
-        <div className="adena-tab-designer-main-nav">
-          <TextField
-            label="Design Name"
-            id="outlined-size-small"
-            defaultValue="Simple Design"
-            size="small"
-            onChange={handleTabNameChange}
-          />
-        </div>
         <div className="adena-tab-designer-main-tabs">
           <Box
             sx={{
@@ -94,6 +103,7 @@ export default function FormDesigner() {
               borderColor: "divider",
               display: "flex",
               justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <Tabs
@@ -103,7 +113,21 @@ export default function FormDesigner() {
             >
               {renderedTabButtons}
             </Tabs>
-              <Icon onClick={addTab} color="primary">add_circle</Icon>
+            <div>
+              {tabValue !== 0 && (
+                <Icon onClick={shiftLeftTab} color="primary">
+                  arrow_back
+                </Icon>
+              )}
+              <Icon onClick={addTab} color="primary">
+                add_circle
+              </Icon>
+              {tabValue !== formDesign.layout.length - 1 && (
+                <Icon onClick={shiftRightTab} color="primary">
+                  arrow_forward
+                </Icon>
+              )}
+            </div>
           </Box>
           {renderedTabs}
         </div>
