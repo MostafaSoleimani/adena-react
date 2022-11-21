@@ -1,0 +1,41 @@
+
+
+.adena-form-designer-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: darkslategray;
+    padding: 10px;
+    color: white;
+}
+
+.adena-form-designer-header-left > img {
+    width: 40px;
+    height: 40px;
+}
+
+.adena-form-designer-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.adena-tab-designer-main {
+    padding-top: 10px;
+}
+
+.adena-tab-designer-main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ff000056;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.adena-tab-designer-main-tabs {
+    margin-top: 5px;
+    border: 1px solid #ff000056;
+    border-radius: 3px;
+    padding: 5px;
+    min-height: 400px;
+}
