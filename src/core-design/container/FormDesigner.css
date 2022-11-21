@@ -1,23 +1,11 @@
 
 
-.adena-form-designer-header {
+.adena-form-design-nav {
     display: flex;
     justify-content: space-between;
-    background-color: darkslategray;
     padding: 10px;
-    color: white;
 }
 
-.adena-form-designer-header-left > img {
-    width: 40px;
-    height: 40px;
-}
-
-.adena-form-designer-header-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
 .adena-tab-designer-main {
     padding-top: 10px;

@@ -71,11 +71,7 @@ export default function FormDesigner() {
   ));
   return (
     <>
-      <header className="adena-form-designer-header">
-        <div className="adena-form-designer-header-left">
-          <img src={Logo} alt="Logo" />
-          Designer
-        </div>
+      <div className="adena-form-design-nav">
         <TextField
           label="Design Name"
           id="outlined-size-small"
@@ -89,12 +85,10 @@ export default function FormDesigner() {
             },
           }}
         />
-        <div className="adena-form-designer-header-right">
-          <Button color="primary" variant="contained" onClick={SaveForm}>
-            Save
-          </Button>
-        </div>
-      </header>
+        <Button color="primary" variant="contained" onClick={SaveForm}>
+          Save
+        </Button>
+      </div>
       <main className="adena-tab-designer-main">
         <div className="adena-tab-designer-main-tabs">
           <Box
@@ -122,7 +116,7 @@ export default function FormDesigner() {
               <Icon onClick={addTab} color="primary">
                 add_circle
               </Icon>
-              {tabValue !== formDesign.layout.length - 1 && (
+              {formDesign.layout.length > 0 && tabValue !== formDesign.layout.length - 1 && (
                 <Icon onClick={shiftRightTab} color="primary">
                   arrow_forward
                 </Icon>
