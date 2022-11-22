@@ -3,9 +3,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import React from "react";
 import { useDispatch } from "react-redux";
+import FIELDS_MODELS from "../../core-fields/field-models";
 import { designerActions } from "../../store/designer-slice";
 import DESIGN_FIELD_CONFIGS from "../field-configs/field-config.model";
-import FIELDS_MODELS from "../fields/field-models";
 import FieldNav from "../tools/FieldNav";
 import "./ContainerDesigner.css";
 

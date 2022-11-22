@@ -5,12 +5,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-
-const fields = ["Checkbox", "Text", "Number", "Dropdown"];
+import { FIELDS_DATA_MODELS } from '../../core-fields/field-models';
 
 export default function ChooseFieldDialog(props) {
   const { onClose, open } = props;
-  const selectedValue = fields[0];
+  const selectedValue = FIELDS_DATA_MODELS[0];
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -22,11 +21,11 @@ export default function ChooseFieldDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>Select a field to add</DialogTitle>
       <List sx={{ pt: 0 }}>
-        {fields.map((email) => (
-          <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-            <ListItemText primary={email} />
+        {Object.values(FIELDS_DATA_MODELS).map((field, idx) => (
+          <ListItem button onClick={() => handleListItemClick(field)} key={idx}>
+            <ListItemText primary={field.data.type} />
           </ListItem>
         ))}
       </List>

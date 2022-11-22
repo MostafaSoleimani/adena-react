@@ -10,10 +10,10 @@ import { useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import { designerActions, fetchFormById } from "../../store/designer-slice";
 import { saveState } from "../tools/browser-storage";
+import FieldNav from "../tools/FieldNav";
 import { a11yProps, TabPanel } from "../tools/TabPanel";
-import AdenaTabDesigner from "./TabDesigner";
-import Logo from "../../logo-no-background.png";
 import "./FormDesigner.css";
+import AdenaTabDesigner from "./TabDesigner";
 
 export default function FormDesigner() {
   const { id } = useParams();
@@ -59,6 +59,8 @@ export default function FormDesigner() {
   const SaveForm = () => {
     saveState(formDesign);
   };
+
+  const removeTab = (idx) => {};
 
   const renderedTabs = formDesign.layout.map((x, i) => (
     <TabPanel key={i} value={tabValue} index={i}>
@@ -108,19 +110,18 @@ export default function FormDesigner() {
               {renderedTabButtons}
             </Tabs>
             <div>
-              {tabValue !== 0 && (
-                <Icon onClick={shiftLeftTab} color="primary">
-                  arrow_back
-                </Icon>
-              )}
-              <Icon onClick={addTab} color="primary">
-                add_circle
-              </Icon>
-              {formDesign.layout.length > 0 && tabValue !== formDesign.layout.length - 1 && (
-                <Icon onClick={shiftRightTab} color="primary">
-                  arrow_forward
-                </Icon>
-              )}
+
+              <FieldNav
+                add={addTab}
+                remove={() => removeTab(tabValue)}
+                label=""
+                shiftRight={
+                  tabValue !== formDesign.layout.length - 1
+                    ? shiftRightTab
+                    : null
+                }
+                shiftLeft={tabValue !== 0 ? shiftLeftTab : null}
+              />
             </div>
           </Box>
           {renderedTabs}

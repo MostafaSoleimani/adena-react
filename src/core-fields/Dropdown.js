@@ -3,12 +3,15 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import * as React from "react";
+import uuid from "react-uuid";
 
-export default function DesignerDropDown({config}) {
+export default function DesignerDropDown({ config, onChange }) {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    const value = event.target.value;
+    setAge(value);
+    if (onChange) onChange(value);
   };
   return (
     <FormControl fullWidth>
@@ -26,4 +29,21 @@ export default function DesignerDropDown({config}) {
       </Select>
     </FormControl>
   );
+}
+
+export const DropdownConfig = {
+  name: "Dropdown",
+  id: uuid(),
+  data: {
+    type: "Dropdown",
+    label: "Which one?",
+    default: null,
+    options: [
+        {name: 'Ten', value: 10},
+        {name: 'Twenty', value: 20},
+        {name: 'Thirty', value: 30},
+    ],
+    URLBase: false,
+    URL: null
+  },
 }
