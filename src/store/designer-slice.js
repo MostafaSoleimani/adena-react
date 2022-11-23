@@ -13,8 +13,38 @@ const designerSlice = createSlice({
     shiftLeftTab: (state, action) => {
       if(action.payload !== 0) insertAndShift(state.layout, action.payload, action.payload - 1)
     },
+    shiftLeftContainer: (state, action) => {
+      const foundTab = state.layout.find(
+        (x) => x.id === action.payload.tabId
+      );
+      const foundContainerIndex = foundTab.data.children.findIndex(x => x.id === action.payload.containerId)
+      if(action.payload !== 0) insertAndShift(foundTab.data.children, foundContainerIndex, foundContainerIndex - 1)
+    },
+    shiftLeftField: (state, action) => {
+      const foundTab = state.layout.find(
+        (x) => x.id === action.payload.tabId
+      );
+      const foundContainer = foundTab.data.children.find(x => x.id === action.payload.containerId);
+      const foundFieldIndex = foundContainer.data.children.findIndex(x => x.id === action.payload.field.id);
+      if(action.payload !== 0) insertAndShift(foundContainer.data.children, foundFieldIndex, foundFieldIndex - 1)
+    },
     shiftRightTab: (state, action) => {
       if(action.payload !== state.layout - 1) insertAndShift(state.layout, action.payload, action.payload + 1)
+    },
+    shiftRightContainer: (state, action) => {
+      const foundTab = state.layout.find(
+        (x) => x.id === action.payload.tabId
+      );
+      const foundContainerIndex = foundTab.data.children.findIndex(x => x.id === action.payload.containerId)
+      if(action.payload !== 0) insertAndShift(foundTab.data.children, foundContainerIndex, foundContainerIndex + 1)
+    },
+    shiftRightField: (state, action) => {
+      const foundTab = state.layout.find(
+        (x) => x.id === action.payload.tabId
+      );
+      const foundContainer = foundTab.data.children.find(x => x.id === action.payload.containerId);
+      const foundFieldIndex = foundContainer.data.children.findIndex(x => x.id === action.payload.field.id);
+      if(action.payload !== 0) insertAndShift(foundContainer.data.children, foundFieldIndex, foundFieldIndex + 1)
     },
     addTab: (state, action) => {
       state.layout = [...state.layout, action.payload];

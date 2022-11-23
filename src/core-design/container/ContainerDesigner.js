@@ -51,6 +51,22 @@ export default function AdenaContainerDesigner({ config, tabId }) {
     }
   };
 
+  const shiftLeftContainer = () => {
+    dispatch(designerActions.shiftLeftContainer({tabId, container: config}));
+  }
+
+  const shiftRightContainer = () => {
+    dispatch(designerActions.shiftRightContainer({tabId, container: config}));
+  }
+
+  const shiftLeftField = (field) => {
+    dispatch(designerActions.shiftLeftField({tabId, containerId: config.id, field}));
+  }
+
+  const shiftRightField = (field) => {
+    dispatch(designerActions.shiftRightField({tabId, containerId: config.id, field}));
+  }
+
   const renderedFields = config.data.children.map((x, i) => (
     <div key={i} className="adena-designer-fields">
       <FieldNav
@@ -58,6 +74,8 @@ export default function AdenaContainerDesigner({ config, tabId }) {
         config={x}
         edit={() => handleClickOpen(x, config.id)}
         label={x.data.type}
+        shiftLeft={() => shiftLeftField(x)}
+        shiftRight={() => shiftRightField(x)}
       />
       {FIELDS_MODELS(x)}
     </div>
@@ -70,6 +88,8 @@ export default function AdenaContainerDesigner({ config, tabId }) {
         edit={() => handleClickOpen(config, null)}
         config={config}
         label={config.data.label}
+        shiftLeft={shiftLeftContainer}
+        shiftRight={shiftRightContainer}
       />
 
       <div className="adena-container-designer-main">
