@@ -56,3 +56,56 @@ header > img {
 header > a {
   color: white;
 }
+
+.adena-form-renderer-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.adena-card {
+  border: 1px solid #0000FF56;
+  border-radius: 3px;
+  min-height: 100px;
+  margin: 1rem 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.adena-card-header {
+  
+  min-height: 50px;
+  background-color: #0000FF16;
+  border-bottom: 1px solid #0000FF56;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: .5rem;
+  width: 100%;
+}
+
+.adena-card-main {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: .5rem;
+}
+
+.adena-form-fields {
+  width: 20%;
+}
+
+.fx {
+  display: flex;
+}
+
+.j-c-start {
+  justify-content: flex-start;
+}
+.j-c-space {
+  justify-content: space-between;
+}
+.a-i-center {
+  align-items: center;
+}

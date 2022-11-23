@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Icon from "@mui/material/Icon";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
@@ -8,8 +7,8 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import uuid from "react-uuid";
-import { designerActions, fetchFormById } from "../../store/designer-slice";
-import { saveState } from "../tools/browser-storage";
+import { designerActions, designerSelect, fetchFormById } from "../../store/designer-slice";
+import { saveState } from "../../utils/browser-storage";
 import FieldNav from "../tools/FieldNav";
 import { a11yProps, TabPanel } from "../tools/TabPanel";
 import "./FormDesigner.css";
@@ -19,7 +18,7 @@ export default function FormDesigner() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const formDesign = useSelector((state) => state.designer);
+  const formDesign = useSelector(designerSelect);
   const [tabValue, setTabValue] = React.useState(0);
   React.useEffect(() => {
     dispatch(fetchFormById(id));
@@ -80,12 +79,6 @@ export default function FormDesigner() {
           value={formDesign.name}
           size="small"
           onChange={handleTabNameChange}
-          sx={{
-            input: {
-              color: "white",
-              borderColor: "#ffffff",
-            },
-          }}
         />
         <Button color="primary" variant="contained" onClick={SaveForm}>
           Save
@@ -110,7 +103,6 @@ export default function FormDesigner() {
               {renderedTabButtons}
             </Tabs>
             <div>
-
               <FieldNav
                 add={addTab}
                 remove={() => removeTab(tabValue)}

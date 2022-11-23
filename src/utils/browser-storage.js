@@ -9,6 +9,17 @@ export function  loadState() {
   }
 }
 
+export function loadFormConfig(id) {
+  try {
+    const serializedState = localStorage.getItem(KEY);
+    if (!serializedState) return [];
+    const config = JSON.parse(serializedState).find(x => x.id === id)
+    return config;
+  } catch (e) {
+    return [];
+  }
+}
+
 export function saveState(state) {
   try {
     let states = loadState();

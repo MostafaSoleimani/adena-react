@@ -3,7 +3,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import * as React from "react";
-import uuid from "react-uuid";
 
 export default function DesignerDropDown({ config, onChange }) {
   const [age, setAge] = React.useState("");
@@ -33,7 +32,6 @@ export default function DesignerDropDown({ config, onChange }) {
 
 export const DropdownConfig = {
   name: "Dropdown",
-  id: uuid(),
   data: {
     type: "Dropdown",
     label: "Which one?",

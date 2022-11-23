@@ -1,9 +1,7 @@
 import Icon from "@mui/material/Icon";
 import React from "react";
-import ChooseFieldDialog from "../tools/ChooseFieldDialog";
 
 export default function FieldNav({
-  config,
   remove,
   edit,
   add,
@@ -11,19 +9,6 @@ export default function FieldNav({
   shiftRight,
   shiftLeft,
 }) {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (field) => {
-    setOpen(false);
-    add({
-      containerId: config.id,
-      field,
-    });
-  };
   return (
     <div className="designer-container-bar">
       <div>
@@ -40,14 +25,13 @@ export default function FieldNav({
           edit_circle
         </Icon>
         {add && (
-          <Icon color="primary" onClick={handleClickOpen}>
+          <Icon color="primary" onClick={add}>
             add_circle
           </Icon>
         )}
         <Icon onClick={shiftRight} color="primary" disabled={!shiftRight}>
           arrow_forward
         </Icon>
-        <ChooseFieldDialog open={open} onClose={handleClose} />
       </div>
     </div>
   );

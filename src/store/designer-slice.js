@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import uuid from "react-uuid";
-import { loadState } from "../core-design/tools/browser-storage";
+import { loadState } from "../utils/browser-storage";
 
 const designerSlice = createSlice({
   name: "designer",
@@ -116,6 +116,8 @@ export const fetchFormById = createAsyncThunk(
     return data.find(x => x.id === id);
   }
 )
+
+export const designerSelect = (state) => state.designer
 
 export const designerActions = designerSlice.actions;
 

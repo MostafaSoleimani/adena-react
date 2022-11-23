@@ -1,6 +1,5 @@
-import React from "react";
 import Checkbox from "@mui/material/Checkbox";
-import uuid from "react-uuid";
+import React from "react";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -20,7 +19,6 @@ export default function DesignerCheckbox({ config, onChange }) {
 
 export const CheckboxConfig = {
   name: "Checkbox",
-  id: uuid(),
   data: {
     type: "Checkbox",
     label: "Is Something?",

@@ -5,19 +5,26 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import uuid from 'react-uuid';
 import { FIELDS_DATA_MODELS } from '../../core-fields/field-models';
 
 export default function ChooseFieldDialog(props) {
   const { onClose, open } = props;
-  const selectedValue = FIELDS_DATA_MODELS[0];
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   const handleListItemClick = (value) => {
-    onClose(value);
+    onClose(injectId(value));
   };
+
+  function injectId(field) {
+    return {
+      ...field, 
+      id: uuid()
+    }
+  }
 
   return (
     <Dialog onClose={handleClose} open={open}>

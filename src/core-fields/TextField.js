@@ -1,6 +1,5 @@
-import React from "react";
 import TextField from "@mui/material/TextField";
-import uuid from "react-uuid";
+import React from "react";
 
 export default function DesignerTextField({ config, onChange }) {
   const handleChange = (e) => {
@@ -19,7 +18,6 @@ export default function DesignerTextField({ config, onChange }) {
 
 export const TextConfig = {
   name: "Text",
-  id: uuid(),
   data: {
     type: "Text",
     label: "Name of ?",

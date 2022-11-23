@@ -6,15 +6,26 @@ import { useDispatch } from "react-redux";
 import FIELDS_MODELS from "../../core-fields/field-models";
 import { designerActions } from "../../store/designer-slice";
 import DESIGN_FIELD_CONFIGS from "../field-configs/field-config.model";
+import ChooseFieldDialog from "../tools/ChooseFieldDialog";
 import FieldNav from "../tools/FieldNav";
 import "./ContainerDesigner.css";
 
 export default function AdenaContainerDesigner({ config, tabId }) {
   const [open, setOpen] = React.useState(false);
   const [editComponent, setEditComponent] = React.useState();
+  const [openAdd, setOpenAdd] = React.useState(false);
+
+  const handleClickOpenAdd = (value) => {
+    setOpenAdd(true);
+  };
+  
+  const handleCloseAdd = (field) => {
+    setOpenAdd(false);
+    if(field) addField(field)
+  };
   const dispatch = useDispatch();
   const addField = (value) => {
-    dispatch(designerActions.addField({tabId, containerId: config.id, ...value}));
+    dispatch(designerActions.addField({tabId, containerId: config.id, field: value}));
   };
 
   const removeField = (field) => {
@@ -54,7 +65,7 @@ export default function AdenaContainerDesigner({ config, tabId }) {
   return (
     <div className="designer-container">
       <FieldNav
-        add={addField}
+        add={handleClickOpenAdd}
         remove={removeContainer}
         edit={() => handleClickOpen(config, null)}
         config={config}
@@ -68,6 +79,7 @@ export default function AdenaContainerDesigner({ config, tabId }) {
         <DialogTitle>Configurations</DialogTitle>
         <DialogContent>{editComponent}</DialogContent>
       </Dialog>
+      <ChooseFieldDialog open={openAdd} onClose={handleCloseAdd} />
     </div>
   );
 }

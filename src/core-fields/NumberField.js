@@ -1,6 +1,5 @@
-import React from "react";
 import TextField from "@mui/material/TextField";
-import uuid from "react-uuid";
+import React from "react";
 
 export default function DesignerNumberField({ config, onChange }) {
   const handleChange = (e) => {
@@ -20,7 +19,6 @@ export default function DesignerNumberField({ config, onChange }) {
 
 export const NumberConfig = {
   name: "Number",
-  id: uuid(),
   data: {
     type: "Number",
     label: "How many?",
