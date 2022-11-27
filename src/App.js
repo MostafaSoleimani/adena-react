@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout";
 import FormDesigner from "./core-design/container/FormDesigner";
@@ -12,10 +12,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<AdenaDesigner />} />
           <Route path="design/:id" element={<FormDesigner />} />
-          <Route
-            path="view/:id"
-            element={<FormRenderer/>}
-          />
+          <Route path="view/:id" element={<FormRenderer />} />
         </Route>
       </Routes>
     </BrowserRouter>

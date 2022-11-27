@@ -1,7 +1,7 @@
 {
   "name": "adena-react",
   "version": "0.1.0",
-  "homepage": "https://MostafaSoleimani.github.io/adena-react",
+  "homepage": "https://mostafasoleimani.github.io/adena-react",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",

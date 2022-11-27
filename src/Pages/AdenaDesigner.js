@@ -11,9 +11,10 @@ export default function AdenaDesigner() {
   ));
   return (
     <div>
-      <Link to={`design/new`}>New Design</Link>
       {formLinks.length === 0 && (
-        <h1>You have not implemented any form so far! Please try new design</h1>
+        <h1>
+          Come On! You have not implemented any form yet! Please try new design
+        </h1>
       )}
       <ul>{formLinks}</ul>
     </div>
