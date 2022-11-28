@@ -1,3 +1,4 @@
+import { Alert, Snackbar } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Tab from "@mui/material/Tab";
@@ -25,6 +26,7 @@ export default function FormDesigner() {
 
   const formDesign = useSelector(designerSelect);
   const [tabValue, setTabValue] = React.useState(0);
+  const [openSnack, setOpenSnack] = React.useState(false);
   React.useEffect(() => {
     dispatch(fetchFormById(id));
   }, [dispatch, id]);
@@ -35,6 +37,10 @@ export default function FormDesigner() {
   const handleTabNameChange = (e) => {
     const { value } = e.target;
     dispatch(designerActions.editForm({ name: value }));
+  };
+
+  const handleCloseSnack = () => {
+    setOpenSnack(false);
   };
 
   const addTab = () => {
@@ -62,9 +68,13 @@ export default function FormDesigner() {
 
   const SaveForm = () => {
     saveState(formDesign);
+    setOpenSnack(true);
   };
 
-  const removeTab = (idx) => {};
+  const removeTab = (idx) => {
+    if (idx === formDesign.length - 1) setTabValue(formDesign.length - 2);
+    dispatch(designerActions.removeTab(formDesign.layout[idx].id));
+  };
 
   const exportJson = () => {
     downloadFile(formDesign, `${formDesign.name}-schema`);
@@ -89,12 +99,15 @@ export default function FormDesigner() {
           size="small"
           onChange={handleTabNameChange}
         />
-        <Button color="primary" variant="contained" onClick={exportJson}>
-          Export
-        </Button>
-        <Button color="primary" variant="contained" onClick={SaveForm}>
-          Save
-        </Button>
+        <div className="fx gap">
+          <Button color="primary" variant="contained" onClick={exportJson}>
+            Export
+          </Button>
+
+          <Button color="primary" variant="contained" onClick={SaveForm}>
+            Save
+          </Button>
+        </div>
       </div>
       <main className="adena-tab-designer-main">
         <div className="adena-tab-designer-main-tabs">
@@ -131,6 +144,19 @@ export default function FormDesigner() {
           {renderedTabs}
         </div>
       </main>
+      <Snackbar
+        open={openSnack}
+        autoHideDuration={6000}
+        onClose={handleCloseSnack}
+      >
+        <Alert
+          onClose={handleCloseSnack}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Design Saved Successfully!
+        </Alert>
+      </Snackbar>
     </>
   );
 }

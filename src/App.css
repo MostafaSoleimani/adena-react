@@ -95,13 +95,28 @@ header > img {
   flex-wrap: wrap;
   padding: .5rem;
 }
+.adena-designs {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: .5rem;
+}
 
 .adena-form-fields {
   width: 20%;
 }
 
+.icon-btn {
+  min-width: unset !important;
+  padding: 0 !important;
+}
+
 .fx {
   display: flex;
+}
+
+.gap {
+  gap: 5px;
 }
 
 .j-c-start {
@@ -112,4 +127,8 @@ header > img {
 }
 .a-i-center {
   align-items: center;
+}
+
+pre {
+  text-align: start;
 }

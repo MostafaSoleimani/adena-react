@@ -1,14 +1,14 @@
 import DesignerCheckbox, { CheckboxConfig } from "./Checkbox";
-import DesignerDropDown, {DropdownConfig} from "./Dropdown";
+import DesignerDropDown, { DropdownConfig } from "./Dropdown";
 import DesignerNumberField, { NumberConfig } from "./NumberField";
 import DesignerTextField, { TextConfig } from "./TextField";
 
-const FIELDS_MODELS = (config) => {
+const FIELDS_MODELS = (config, onChange) => {
   const model = {
-    Checkbox: <DesignerCheckbox config={config} />,
-    Text: <DesignerTextField config={config} />,
-    Number: <DesignerNumberField config={config} />,
-    Dropdown: <DesignerDropDown config={config} />,
+    Checkbox: <DesignerCheckbox config={config} onChange={onChange} />,
+    Text: <DesignerTextField config={config} onChange={onChange} />,
+    Number: <DesignerNumberField config={config} onChange={onChange} />,
+    Dropdown: <DesignerDropDown config={config} onChange={onChange} />,
   };
   return model[config.data.type];
 };
