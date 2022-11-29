@@ -6,7 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import {
   designerActions,
@@ -22,6 +22,7 @@ import AdenaTabDesigner from "./TabDesigner";
 
 export default function FormDesigner() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const formDesign = useSelector(designerSelect);
@@ -71,6 +72,12 @@ export default function FormDesigner() {
     setOpenSnack(true);
   };
 
+  const SaveAndDemoForm = () => {
+    saveState(formDesign);
+    setOpenSnack(true);
+    navigate(`/view/${id}`);
+  };
+
   const removeTab = (idx) => {
     if (idx === formDesign.length - 1) setTabValue(formDesign.length - 2);
     dispatch(designerActions.removeTab(formDesign.layout[idx].id));
@@ -107,6 +114,10 @@ export default function FormDesigner() {
           <Button color="primary" variant="contained" onClick={SaveForm}>
             Save
           </Button>
+
+          <Button color="primary" variant="contained" onClick={SaveAndDemoForm}>
+            Save&Demo
+          </Button>
         </div>
       </div>
       <main className="adena-tab-designer-main">
@@ -130,14 +141,23 @@ export default function FormDesigner() {
             <div>
               <FieldNav
                 add={addTab}
-                remove={() => removeTab(tabValue)}
+                remove={
+                  formDesign.layout.length > 0
+                    ? () => removeTab(tabValue)
+                    : null
+                }
                 label=""
                 shiftRight={
+                  formDesign.layout.length > 0 &&
                   tabValue !== formDesign.layout.length - 1
                     ? shiftRightTab
                     : null
                 }
-                shiftLeft={tabValue !== 0 ? shiftLeftTab : null}
+                shiftLeft={
+                  formDesign.layout.length > 0 && tabValue !== 0
+                    ? shiftLeftTab
+                    : null
+                }
               />
             </div>
           </Box>

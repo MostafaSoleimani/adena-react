@@ -19,12 +19,14 @@ export default function FieldNav({
         <Button onClick={shiftLeft} className="icon-btn" disabled={!shiftLeft}>
           <Icon color="primary">arrow_back</Icon>
         </Button>
-        <Button onClick={remove} className="icon-btn">
+        <Button onClick={remove} className="icon-btn" disabled={!remove}>
           <Icon color="primary">delete_circle</Icon>
         </Button>
-        <Button onClick={edit} className="icon-btn">
-          <Icon color="primary">edit_circle</Icon>
-        </Button>
+        {edit && (
+          <Button onClick={edit} className="icon-btn">
+            <Icon color="primary">edit_circle</Icon>
+          </Button>
+        )}
         {add && (
           <Button onClick={add} className="icon-btn">
             <Icon color="primary">add_circle</Icon>
