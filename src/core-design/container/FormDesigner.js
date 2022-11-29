@@ -75,7 +75,10 @@ export default function FormDesigner() {
   const SaveAndDemoForm = () => {
     saveState(formDesign);
     setOpenSnack(true);
-    navigate(`/view/${id}`);
+    // Make sure that form saved correctly
+    setTimeout(() => {
+      navigate(`/view/${id}`);
+    }, 100);
   };
 
   const removeTab = (idx) => {

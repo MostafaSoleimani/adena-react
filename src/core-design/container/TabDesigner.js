@@ -16,7 +16,7 @@ export default function AdenaTabDesigner({ config }) {
         tabId: config.id,
         container: {
           id: uuid(),
-          name: "container",
+          name: `container${config.data.children.length}`,
           data: {
             label: "Simple Container",
             type: "Container",

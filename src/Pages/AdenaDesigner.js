@@ -27,7 +27,12 @@ export default function AdenaDesigner() {
     <div>
       {formLinks.length === 0 && (
         <h1>
-          Come On! You have not implemented any form yet! Please try new design
+          Come On! You have not implemented any form yet! Please try new design.
+          ******{" "}
+          <b>
+            Make Sure that all tabs and containers and fields have a unique name
+          </b>{" "}
+          ******
         </h1>
       )}
       {formLinks.length > 0 && (
