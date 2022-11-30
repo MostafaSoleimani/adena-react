@@ -28,10 +28,11 @@ export default function AdenaDesigner() {
       {formLinks.length === 0 && (
         <h1>
           Come On! You have not implemented any form yet! Please try new design.
-          ******{" "}
+          <br />
+          ******
           <b>
             Make Sure that all tabs and containers and fields have a unique name
-          </b>{" "}
+          </b>
           ******
         </h1>
       )}

@@ -77,7 +77,7 @@ export default function FormDesigner() {
     setOpenSnack(true);
     // Make sure that form saved correctly
     setTimeout(() => {
-      navigate(`/view/${id}`);
+      navigate(`/view/${formDesign.id}`);
     }, 100);
   };
 
