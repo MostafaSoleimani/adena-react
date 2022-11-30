@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
+import OptionsConfig from "../tools/OptionsConfig";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -16,9 +17,40 @@ export default function DropdownConfig({ config, save }) {
     const { name, value, checked, type } = e.target;
     setTempConfig((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
+
+  const onAddOption = () => {
+    setTempConfig((prev) => ({
+      ...prev,
+      options: [...prev.options, { id: "id", label: "label" }],
+    }));
+  };
+  const onDeleteOption = (idx) => {
+    setTempConfig((prev) => {
+      const options = [...prev.options];
+      options.splice(idx, 1);
+      return {
+        ...prev,
+        options,
+      };
+    });
+  };
+  const onChangeOption = (idx, key, value) => {
+    setTempConfig((prev) => {
+      const options = prev.options;
+      return {
+        ...prev,
+        options: [
+          ...options.slice(0, idx),
+          { ...options[idx], [key]: value },
+          ...options.slice(idx + 1),
+        ],
+      };
+    });
+  };
+
   return (
     <Box
       component="form"
@@ -63,6 +95,12 @@ export default function DropdownConfig({ config, save }) {
           label="URL"
           value={tempConfig.URLBase}
           onChange={handleChange}
+        />
+        <OptionsConfig
+          onAdd={onAddOption}
+          onDelete={onDeleteOption}
+          onChange={onChangeOption}
+          options={tempConfig.options}
         />
       </div>
       <Button variant="contained" onClick={() => save(tempConfig)}>

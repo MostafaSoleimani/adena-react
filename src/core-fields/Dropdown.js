@@ -12,6 +12,12 @@ export default function DesignerDropDown({ config, onChange }) {
     setAge(value);
     if (onChange) onChange(value);
   };
+
+  const options = config.data.options.map((x, i) => (
+    <MenuItem key={i} value={x.id}>
+      {x.label}
+    </MenuItem>
+  ));
   return (
     <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label">{config.data.label}</InputLabel>
@@ -22,9 +28,7 @@ export default function DesignerDropDown({ config, onChange }) {
         label={config.data.label}
         onChange={handleChange}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {options}
       </Select>
     </FormControl>
   );
@@ -37,11 +41,11 @@ export const DropdownConfig = {
     label: "Which one?",
     default: null,
     options: [
-        {name: 'Ten', value: 10},
-        {name: 'Twenty', value: 20},
-        {name: 'Thirty', value: 30},
+      { label: "Ten", id: 10 },
+      { label: "Twenty", id: 20 },
+      { label: "Thirty", id: 30 },
     ],
     URLBase: false,
-    URL: null
+    URL: null,
   },
-}
+};
