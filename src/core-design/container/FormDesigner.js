@@ -1,4 +1,10 @@
-import { Alert, Snackbar } from "@mui/material";
+import {
+  Alert,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Snackbar,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Tab from "@mui/material/Tab";
@@ -6,7 +12,7 @@ import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import {
   designerActions,
@@ -14,6 +20,7 @@ import {
   fetchFormById,
 } from "../../store/designer-slice";
 import { saveState } from "../../utils/browser-storage";
+import FormConfig from "../field-configs/FormConfig";
 import FieldNav from "../tools/FieldNav";
 import downloadFile from "../tools/file-exporter";
 import { a11yProps, TabPanel } from "../tools/TabPanel";
@@ -22,12 +29,12 @@ import AdenaTabDesigner from "./TabDesigner";
 
 export default function FormDesigner() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const formDesign = useSelector(designerSelect);
   const [tabValue, setTabValue] = React.useState(0);
   const [openSnack, setOpenSnack] = React.useState(false);
+  const [openSave, setOpenSave] = React.useState(false);
   React.useEffect(() => {
     dispatch(fetchFormById(id));
   }, [dispatch, id]);
@@ -37,7 +44,7 @@ export default function FormDesigner() {
 
   const handleTabNameChange = (e) => {
     const { value } = e.target;
-    dispatch(designerActions.editForm({ name: value }));
+    dispatch(designerActions.editForm({ ...formDesign, name: value }));
   };
 
   const handleCloseSnack = () => {
@@ -67,18 +74,20 @@ export default function FormDesigner() {
     setTabValue((pre) => pre + 1);
   };
 
-  const SaveForm = () => {
-    saveState(formDesign);
-    setOpenSnack(true);
+  const handleEdit = () => {
+    setOpenSave(true);
   };
 
-  const SaveAndDemoForm = () => {
-    saveState(formDesign);
+  const saveForm = (config) => {
+    setOpenSave(false);
+    dispatch(designerActions.editForm({ ...formDesign, ...config }));
+    saveState({ ...formDesign, ...config });
     setOpenSnack(true);
-    // Make sure that form saved correctly
-    setTimeout(() => {
-      navigate(`/view/${formDesign.id}`);
-    }, 100);
+    handleClose();
+  };
+
+  const handleClose = () => {
+    setOpenSave(false);
   };
 
   const removeTab = (idx) => {
@@ -114,12 +123,8 @@ export default function FormDesigner() {
             Export
           </Button>
 
-          <Button color="primary" variant="contained" onClick={SaveForm}>
+          <Button color="primary" variant="contained" onClick={handleEdit}>
             Save
-          </Button>
-
-          <Button color="primary" variant="contained" onClick={SaveAndDemoForm}>
-            Save&Demo
           </Button>
         </div>
       </div>
@@ -180,6 +185,12 @@ export default function FormDesigner() {
           Design Saved Successfully!
         </Alert>
       </Snackbar>
+      <Dialog open={openSave} onClose={handleClose}>
+        <DialogTitle>Configurations</DialogTitle>
+        <DialogContent>
+          <FormConfig config={formDesign} save={saveForm} />
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

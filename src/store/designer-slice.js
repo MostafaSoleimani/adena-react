@@ -7,6 +7,11 @@ const designerSlice = createSlice({
   initialState: {
     name: "Simple Design",
     id: uuid(),
+    description: "This is a simple Form",
+    createdAt: new Date().toString(),
+    modifiedAt: new Date().toString(),
+    version: "0.0.0",
+    submitURL: "",
     layout: [],
   },
   reducers: {
@@ -88,10 +93,13 @@ const designerSlice = createSlice({
     },
     editForm: (state, action) => {
       state.name = action.payload.name;
+      state.description = action.payload.description;
+      state.version = action.payload.version;
+      state.modifiedAt = action.payload.modifiedAt;
+      state.submitURL = action.payload.submitURL;
     },
     setForm: (state, action) => {
       state = action.payload;
-      console.log(state);
     },
     editTab: (state, action) => {
       let tab = state.layout.find((x) => x.id === action.payload.id);
@@ -156,6 +164,11 @@ export const fetchFormById = createAsyncThunk(
     if (!id || id === "new") {
       return {
         name: "Simple Design",
+        description: "This is a simple Form",
+        createdAt: new Date().toString(),
+        modifiedAt: new Date().toString(),
+        version: "0.0.0",
+        submitURL: "",
         id: uuid(),
         layout: [],
       };

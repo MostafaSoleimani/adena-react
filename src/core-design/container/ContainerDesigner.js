@@ -18,24 +18,30 @@ export default function AdenaContainerDesigner({ config, tabId }) {
   const handleClickOpenAdd = (value) => {
     setOpenAdd(true);
   };
-  
+
   const handleCloseAdd = (field) => {
     setOpenAdd(false);
-    if(field) addField(field)
+    if (field) addField(field);
   };
   const dispatch = useDispatch();
   const addField = (value) => {
-    dispatch(designerActions.addField({tabId, containerId: config.id, field: value}));
+    dispatch(
+      designerActions.addField({ tabId, containerId: config.id, field: value })
+    );
   };
 
   const removeField = (field) => {
-    dispatch(designerActions.removeField({ tabId, containerId: config.id, field }));
+    dispatch(
+      designerActions.removeField({ tabId, containerId: config.id, field })
+    );
   };
   const removeContainer = () => {
-    dispatch(designerActions.removeContainer({tabId, containerId: config.id}));
+    dispatch(
+      designerActions.removeContainer({ tabId, containerId: config.id })
+    );
   };
 
-  const handleClickOpen = (fieldConfig, parentId) => {
+  const handleEdit = (fieldConfig, parentId) => {
     setEditComponent(
       DESIGN_FIELD_CONFIGS(fieldConfig, (conf) => handleClose(conf, parentId))
     );
@@ -45,34 +51,46 @@ export default function AdenaContainerDesigner({ config, tabId }) {
   const handleClose = (fieldConfig, parentId) => {
     setOpen(false);
     if (parentId) {
-      dispatch(designerActions.editField({tabId, containerId: config.id, field: fieldConfig}));
+      dispatch(
+        designerActions.editField({
+          tabId,
+          containerId: config.id,
+          field: fieldConfig,
+        })
+      );
     } else {
-      dispatch(designerActions.editContainer({tabId, container: fieldConfig}));
+      dispatch(
+        designerActions.editContainer({ tabId, container: fieldConfig })
+      );
     }
   };
 
   const shiftLeftContainer = () => {
-    dispatch(designerActions.shiftLeftContainer({tabId, container: config}));
-  }
+    dispatch(designerActions.shiftLeftContainer({ tabId, container: config }));
+  };
 
   const shiftRightContainer = () => {
-    dispatch(designerActions.shiftRightContainer({tabId, container: config}));
-  }
+    dispatch(designerActions.shiftRightContainer({ tabId, container: config }));
+  };
 
   const shiftLeftField = (field) => {
-    dispatch(designerActions.shiftLeftField({tabId, containerId: config.id, field}));
-  }
+    dispatch(
+      designerActions.shiftLeftField({ tabId, containerId: config.id, field })
+    );
+  };
 
   const shiftRightField = (field) => {
-    dispatch(designerActions.shiftRightField({tabId, containerId: config.id, field}));
-  }
+    dispatch(
+      designerActions.shiftRightField({ tabId, containerId: config.id, field })
+    );
+  };
 
   const renderedFields = config.data.children.map((x, i) => (
     <div key={i} className="adena-designer-fields">
       <FieldNav
         remove={() => removeField(x)}
         config={x}
-        edit={() => handleClickOpen(x, config.id)}
+        edit={() => handleEdit(x, config.id)}
         label={x.data.type}
         shiftLeft={() => shiftLeftField(x)}
         shiftRight={() => shiftRightField(x)}
@@ -85,7 +103,7 @@ export default function AdenaContainerDesigner({ config, tabId }) {
       <FieldNav
         add={handleClickOpenAdd}
         remove={removeContainer}
-        edit={() => handleClickOpen(config, null)}
+        edit={() => handleEdit(config, null)}
         config={config}
         label={config.data.label}
         shiftLeft={shiftLeftContainer}
