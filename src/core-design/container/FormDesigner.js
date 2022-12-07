@@ -22,7 +22,6 @@ import {
 import { saveState } from "../../utils/browser-storage";
 import FormConfig from "../field-configs/FormConfig";
 import FieldNav from "../tools/FieldNav";
-import downloadFile from "../tools/file-exporter";
 import { a11yProps, TabPanel } from "../tools/TabPanel";
 import "./FormDesigner.css";
 import AdenaTabDesigner from "./TabDesigner";
@@ -95,10 +94,6 @@ export default function FormDesigner() {
     dispatch(designerActions.removeTab(formDesign.layout[idx].id));
   };
 
-  const exportJson = () => {
-    downloadFile(formDesign, `${formDesign.name}-schema`);
-  };
-
   const renderedTabs = formDesign.layout.map((x, i) => (
     <TabPanel key={i} value={tabValue} index={i}>
       <AdenaTabDesigner config={x} />
@@ -119,10 +114,6 @@ export default function FormDesigner() {
           onChange={handleTabNameChange}
         />
         <div className="fx gap">
-          <Button color="primary" variant="contained" onClick={exportJson}>
-            Export
-          </Button>
-
           <Button color="primary" variant="contained" onClick={handleEdit}>
             Save
           </Button>

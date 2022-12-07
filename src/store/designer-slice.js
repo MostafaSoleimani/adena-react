@@ -188,3 +188,14 @@ function insertAndShift(arr, from, to) {
   let cutOut = arr.splice(from, 1)[0]; // cut the element at index 'from'
   arr.splice(to, 0, cutOut); // insert it at index 'to'
 }
+
+export const FormConfigData = {
+  name: "Simple Design",
+  description: "This is a simple Form",
+  createdAt: new Date().toString(),
+  modifiedAt: new Date().toString(),
+  version: "0.0.0",
+  submitURL: "",
+  id: uuid(),
+  layout: [],
+};

@@ -9,6 +9,17 @@ export function loadState() {
   }
 }
 
+export function deleteState(id) {
+  try {
+    let states = loadState();
+    states = states.filter((x) => x.id !== id);
+    const serializedState = JSON.stringify(states);
+    localStorage.setItem(KEY, serializedState);
+  } catch (e) {
+    return [];
+  }
+}
+
 export function loadFormConfig(id) {
   try {
     const serializedState = localStorage.getItem(KEY);
