@@ -2,19 +2,22 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import uuid from "react-uuid";
 import { loadState } from "../utils/browser-storage";
 
+const initialState = {
+  name: "Simple Schema",
+  id: uuid(),
+  description: "This is a simple Form",
+  createdAt: new Date().toString(),
+  modifiedAt: new Date().toString(),
+  version: "0.0.0",
+  submitURL: "",
+  layout: [],
+};
+
 const designerSlice = createSlice({
   name: "designer",
-  initialState: {
-    name: "Simple Design",
-    id: uuid(),
-    description: "This is a simple Form",
-    createdAt: new Date().toString(),
-    modifiedAt: new Date().toString(),
-    version: "0.0.0",
-    submitURL: "",
-    layout: [],
-  },
+  initialState,
   reducers: {
+    reset: () => initialState,
     shiftLeftTab: (state, action) => {
       if (action.payload !== 0)
         insertAndShift(state.layout, action.payload, action.payload - 1);
@@ -163,14 +166,7 @@ export const fetchFormById = createAsyncThunk(
   async (id, thunkAPI) => {
     if (!id || id === "new") {
       return {
-        name: "Simple Design",
-        description: "This is a simple Form",
-        createdAt: new Date().toString(),
-        modifiedAt: new Date().toString(),
-        version: "0.0.0",
-        submitURL: "",
-        id: uuid(),
-        layout: [],
+        ...initialState,
       };
     }
     const data = await loadState();
@@ -188,14 +184,3 @@ function insertAndShift(arr, from, to) {
   let cutOut = arr.splice(from, 1)[0]; // cut the element at index 'from'
   arr.splice(to, 0, cutOut); // insert it at index 'to'
 }
-
-export const FormConfigData = {
-  name: "Simple Design",
-  description: "This is a simple Form",
-  createdAt: new Date().toString(),
-  modifiedAt: new Date().toString(),
-  version: "0.0.0",
-  submitURL: "",
-  id: uuid(),
-  layout: [],
-};

@@ -1,10 +1,11 @@
-import { Label } from "@mui/icons-material";
-import { Button, Icon, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import Icon from "@mui/material/Icon";
+import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
 
 export default function OptionsConfig({ onAdd, onDelete, onChange, options }) {
   const rows = options.map((option, idx) => (
-    <div key={idx}>
+    <div key={idx} className="adena-options-config-row">
       <TextField
         required
         label="id"
@@ -29,8 +30,8 @@ export default function OptionsConfig({ onAdd, onDelete, onChange, options }) {
     </div>
   ));
   return (
-    <div>
-      <div className="fx gap j-c-space">
+    <div className="adena-options-config">
+      <div className="adena-options-config-nav">
         <label>Options</label>
         <Button className="icon-btn" onClick={onAdd}>
           <Icon color="primary">add_circle</Icon>

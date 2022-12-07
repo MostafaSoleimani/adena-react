@@ -52,11 +52,16 @@ export default function AdenaTabDesigner({ config }) {
           onChange={handleTabNameChange}
           size="small"
         />
-        <Button color="primary" variant="contained" onClick={addContainer}>
-          Add Container<Icon>add_circle</Icon>
-        </Button>
       </div>
       {renderedContainers}
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={addContainer}
+        sx={{ margin: "1rem" }}
+      >
+        Add Container<Icon>add_circle</Icon>
+      </Button>
     </div>
   );
 }

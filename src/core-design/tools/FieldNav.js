@@ -16,12 +16,16 @@ export default function FieldNav({
         <label>{label}</label>
       </div>
       <div className="fx">
-        <Button onClick={shiftLeft} className="icon-btn" disabled={!shiftLeft}>
-          <Icon color="primary">arrow_back</Icon>
-        </Button>
-        <Button onClick={remove} className="icon-btn" disabled={!remove}>
-          <Icon color="primary">delete_circle</Icon>
-        </Button>
+        {shiftLeft && (
+          <Button onClick={shiftLeft} className="icon-btn">
+            <Icon color="primary">arrow_back</Icon>
+          </Button>
+        )}
+        {remove && (
+          <Button onClick={remove} className="icon-btn">
+            <Icon color="primary">delete_circle</Icon>
+          </Button>
+        )}
         {edit && (
           <Button onClick={edit} className="icon-btn">
             <Icon color="primary">edit_circle</Icon>
@@ -32,13 +36,11 @@ export default function FieldNav({
             <Icon color="primary">add_circle</Icon>
           </Button>
         )}
-        <Button
-          onClick={shiftRight}
-          className="icon-btn"
-          disabled={!shiftRight}
-        >
-          <Icon color="primary">arrow_forward</Icon>
-        </Button>
+        {shiftRight && (
+          <Button onClick={shiftRight} className="icon-btn">
+            <Icon color="primary">arrow_forward</Icon>
+          </Button>
+        )}
       </div>
     </div>
   );

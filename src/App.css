@@ -132,6 +132,32 @@ main {
   justify-content: space-between;
 }
 
+.adena-options-config {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.adena-options-config-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.adena-options-config-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.25rem;
+}
+
 .fx {
   display: flex;
 }

@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  Icon,
   Snackbar,
 } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -12,7 +13,7 @@ import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import {
   designerActions,
@@ -29,6 +30,7 @@ import AdenaTabDesigner from "./TabDesigner";
 export default function FormDesigner() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formDesign = useSelector(designerSelect);
   const [tabValue, setTabValue] = React.useState(0);
@@ -83,6 +85,7 @@ export default function FormDesigner() {
     saveState({ ...formDesign, ...config });
     setOpenSnack(true);
     handleClose();
+    navigate(`/`);
   };
 
   const handleClose = () => {
@@ -136,10 +139,13 @@ export default function FormDesigner() {
               aria-label="basic tabs example"
             >
               {renderedTabButtons}
+
+              <Button onClick={addTab}>
+                <Icon color="primary">add_circle</Icon>
+              </Button>
             </Tabs>
             <div>
               <FieldNav
-                add={addTab}
                 remove={
                   formDesign.layout.length > 0
                     ? () => removeTab(tabValue)

@@ -81,6 +81,13 @@ export default function DropdownConfig({ config, save }) {
           value={tempConfig.placeholder}
           onChange={handleChange}
         />
+        <TextField
+          disabled={!tempConfig.URLBase}
+          name="URL"
+          label="URL"
+          value={tempConfig.URLBase}
+          onChange={handleChange}
+        />
         <div>
           <label>URL Based</label>
           <Checkbox
@@ -89,13 +96,7 @@ export default function DropdownConfig({ config, save }) {
             onChange={handleChange}
           />
         </div>
-        <TextField
-          disabled={!tempConfig.URLBase}
-          name="URL"
-          label="URL"
-          value={tempConfig.URLBase}
-          onChange={handleChange}
-        />
+
         <OptionsConfig
           onAdd={onAddOption}
           onDelete={onDeleteOption}

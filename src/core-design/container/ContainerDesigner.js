@@ -1,3 +1,4 @@
+import { Button, Icon } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -101,7 +102,6 @@ export default function AdenaContainerDesigner({ config, tabId }) {
   return (
     <div className="designer-container">
       <FieldNav
-        add={handleClickOpenAdd}
         remove={removeContainer}
         edit={() => handleEdit(config, null)}
         config={config}
@@ -111,7 +111,17 @@ export default function AdenaContainerDesigner({ config, tabId }) {
       />
 
       <div className="adena-container-designer-main">
-        <div className="adena-container-designer-fields">{renderedFields}</div>
+        <div className="adena-container-designer-fields">
+          {renderedFields}
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={handleClickOpenAdd}
+            sx={{ margin: "1rem" }}
+          >
+            Add Field<Icon>add_circle</Icon>
+          </Button>
+        </div>
       </div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Configurations</DialogTitle>
